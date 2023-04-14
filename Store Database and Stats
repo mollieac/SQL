@@ -1,0 +1,47 @@
+--Create a store database
+
+CREATE TABLE Cleaning_Products
+(ID integer,
+Item TEXT,
+Quantity integer,
+Shelf integer,
+Row integer,
+Price integer)
+;
+
+INSERT INTO Cleaning_Products VALUES
+(1, "Swiffer Duster 180", 24, 1, 1, 15),
+(2, "Swiffer Duster 360", 24, 2, 1, 15),
+(3, "Stainless Steel Polish", 10, 1, 2, 8),
+(4, "Barkeepers Friend", 24, 1, 2, 4),
+(5, "Weiman Cooktop Cleaner", 5, 1, 2, 9),
+(6, "Oven Cleaner", 4, 1, 2, 9),
+(7, "H2Off Glass Cleaner", 9, 1, 2, 9),
+(8, "Hand Soap", 8, 1, 2, 3),
+(9, "Zep Tub&Tile", 8, 2, 2, 5),
+(10, "CLR Brilliant Bath", 24, 2, 2, 5),
+(11, "Lysol TB Cleaner", 24, 2, 2, 3),
+(12, "Simple Green Concentrate", 6, 1, 3, 11),
+(13, "Murphey's Oil Soap", 3, 1, 3, 14),
+(14, "Degreaser", 4, 1, 3, 15),
+(15, "Damp Mop Floor Cleaner", 12, 1, 4, 20),
+(16, "Antibacterial Concentrate", 4, 2, 3, 15),
+(17, "Rubbing Alcohol", 6, 2, 3, 4),
+(18, "Magic Erasers", 50, 3, 2, 1),
+(19, "Toilet Bowl Brushes", 30, 3, 3, 2),
+(20, "Microfiber Rags", 250, 4, 1, 1)
+;
+
+--display the database ordered by price.
+SELECT * FROM Cleaning_Products
+ORDER BY Price;
+
+--What is the average price of the items on shelf 1?
+Select AVG(Price) "Average Item Price on Shelf 1" 
+FROM Cleaning_Products
+WHERE shelf = 1 
+
+--How many Items are currently stocked on the shelves?
+Select SUM(Quantity) "How many items are currently stocked?"
+FROM Cleaning_Products;
+
