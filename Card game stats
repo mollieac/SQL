@@ -1,0 +1,161 @@
+/* Put your data in here and query it! */
+/*  Friendly Card Game Results:
+During this past winter, a few friends got together every Wednesday night for a friendly game of cards.  On some nights they'd play two games, but never the same game twice on the same night.  The usual players were Spunky Sam, Marcimus, Winston, and Hopper.  Sometimes, one of the friends couldn't make it, so there were only three players.  But sometimes they'd call another friend to fill-in.  In every game they played, the one with the hightest score was declared the winner.  These are their results:
+Created by: https://www.khanacademy.org/profile/brianduckworth
+*/
+
+CREATE TABLE card_games(id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date_played TEXT,
+    game_name TEXT,
+    player_name TEXT,
+    score INTEGER);
+    
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/07','Rummy','Spunky Sam',226);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/07','Rummy','Marcimus',418);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/07','Rummy','Winston',523);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/07','Rummy','Hopper',311);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Go Fish','Spunky Sam',7);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Go Fish','Marcimus',5);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Go Fish','Winston',4);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Go Fish','Hopper',10);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Crazy Eights','Spunky Sam',215);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Crazy Eights','Marcimus',167);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Crazy Eights','Winston',109);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/14','Crazy Eights','Hopper',192);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/21','Rummy','Spunky Sam',473);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/21','Rummy','Marcimus',324);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/21','Rummy','Hopper',516);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/28','Crazy Eights','Spunky Sam',119);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/28','Crazy Eights','Marcimus',212);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/28','Crazy Eights','Purple Pi',314);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/01/28','Crazy Eights','Hopper',252);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Go Fish','Spunky Sam',3);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Go Fish','Marcimus',11);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Go Fish','Winston',12);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Go Fish','Hopper',0);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Pitch','Spunky Sam',17);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Pitch','Marcimus',22);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Pitch','Winston',-3);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/04','Pitch','Hopper',9);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/11','Rummy','Amelia',525);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/11','Rummy','Marcimus',419);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/11','Rummy','Winston',316);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/11','Rummy','Hopper',398);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/18','Crazy Eights','Spunky Sam',119);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/18','Crazy Eights','Marcimus',231);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/18','Crazy Eights','Winston',153);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/18','Crazy Eights','Hopper',175);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Pitch','Spunky Sam',12);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Pitch','Marcimus',6);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Pitch','Winston',21);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Go Fish','Spunky Sam',6);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Go Fish','Marcimus',7);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/02/25','Go Fish','Winston',13);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/04','Rummy','Spunky Sam',378);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/04','Rummy','Marcimus',327);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/04','Rummy','Winston',413);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/04','Rummy','Hopper',517);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/11','Pitch','Spunky Sam',-1);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/11','Pitch','Marcimus',-5);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/11','Pitch','Winston',7);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/11','Pitch','Hopper',22);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/18','Crazy Eights','Spunky Sam',91);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/18','Crazy Eights','Marcimus',153);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/18','Crazy Eights','Amelia',174);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/18','Crazy Eights','Mr. Pink',216);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/25','Rummy','Spunky Sam',416);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/25','Rummy','Marcimus',505);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/25','Rummy','Winston',397);
+INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03/25','Rummy','Hopper',443);
+
+
+--What was the highest score and from which player?
+SELECT player_name, MAX(score) AS highest_score FROM card_games;
+
+
+--What was the lowest score and from which player?
+SELECT player_name, MIN(score) AS lowest_score FROM card_games;
+
+
+--What was the average score?
+SELECT ROUND(AVG(score)) AS average_score FROM card_games;
+
+
+--Who are the players who scored a sum of 1000 or more?
+SELECT player_name, SUM(score) AS total_score FROM card_games
+    GROUP BY player_name
+    HAVING total_score > 1000;
+    
+    
+--How many people played? How many times did each player play?
+SELECT player_name, COUNT(player_name) AS times_played FROM card_games 
+GROUP BY player_name 
+ORDER BY times_played desc;
+
+
+--Game stats for Marcimus
+SELECT game_name AS Marcimus_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Marcimus"
+GROUP BY game_name;
+
+
+--Game stats for Spunky Sam
+SELECT game_name AS SpunkySam_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Spunky Sam"
+GROUP BY game_name;
+
+--Game stats for Hopper
+SELECT game_name AS Hopper_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Hopper"
+GROUP BY game_name;
+
+--Game stats for Winston
+SELECT game_name AS Winston_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Winston"
+GROUP BY game_name;
+
+--Game stats for Amelia
+SELECT game_name AS Amelia_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Amelia"
+GROUP BY game_name;
+
+--Game stats for Mr. Pink
+SELECT game_name AS MrPink_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Mr. Pink"
+GROUP BY game_name;
+
+--Game stats for Purple Pi
+SELECT game_name AS PurplePi_games, COUNT(game_name) AS times_played, ROUND(AVG(score)) AS average_score FROM card_games
+WHERE player_name = "Purple Pi"
+GROUP BY game_name;
+
+
+
+--Rummy Stats
+SELECT ROUND(AVG(score)) AS Average_score,
+MAX(score) AS Highest_score,
+MIN(score) AS Lowest_score
+FROM card_games 
+WHERE game_name = "Rummy";
+
+--Rummy players and scores
+SELECT player_name AS Player, 
+COUNT(game_name) AS Times_played, 
+SUM(score) AS total_score, 
+ROUND(AVG(score)) AS avg_score
+FROM card_games 
+WHERE game_name = "Rummy" 
+GROUP BY player_name;
+
+
+--Rummy scores with score range
+SELECT date_played, player_name, score, 
+    CASE
+        WHEN score = 525 THEN "Highest Score"
+        WHEN score > 413 THEN "Above Average"
+        WHEN score = 413 THEN "Average"
+        WHEN score < 413 THEN "Below Average"
+        WHEN score = 226 THEN "Lowest Score"
+    END AS "score_range"
+FROM card_games
+WHERE game_name = "Rummy"
