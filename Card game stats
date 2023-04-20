@@ -159,3 +159,12 @@ SELECT date_played, player_name, score,
     END AS "score_range"
 FROM card_games
 WHERE game_name = "Rummy"
+
+
+--What player(s) played Pitch or has ever scored above 500?
+SELECT player_name
+FROM card_games
+WHERE game_name = "Pitch"
+OR score > 500
+GROUP BY player_name
+;
