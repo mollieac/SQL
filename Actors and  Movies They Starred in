@@ -1,0 +1,104 @@
+/* Create table about the people and what they do here */
+
+
+CREATE TABLE actors (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+age INTEGER
+);
+
+CREATE TABLE movies (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+title TEXT,
+year_released INTEGER,
+rating INTEGER
+);
+
+CREATE TABLE movies_with_actors (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+movie_id INTEGER,
+actor_id INTEGER
+);
+
+CREATE TABLE people_who_starred_in_the_same_movie (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+actor1_id INTEGER,
+actor2_id INTEGER
+);
+
+INSERT INTO actors (name, age) VALUES
+('Adam Sandler', 56),
+('Jennifer Aniston', 54),
+('Drew Barrymore', 48),
+('Dwayne Johnson', 50),
+('Kevin Hart', 43),
+('Jim Carrey', 61),
+('Zooey Deschanel', 43)
+;
+
+INSERT INTO movies (title, year_released, rating) VALUES
+('Liar Liar', 1997, 6.9),
+('Sonic the Hedgehog', 2020, 6.5),
+('50 First Dates', 2004, 6.8),
+('Blended', 2014, 6.5),
+('E.T.', 1982, 7.9),
+('Jumanji: WTTJ', 2017, 6.9),
+('Jumanji: The Next Level', 2019, 6.7),
+('Murder Mystery', 2019, 6);
+
+INSERT INTO movies_with_actors (movie_id, actor_id) VALUES
+(1, 6),
+(2, 6),
+(3, 1),
+(3, 3),
+(4, 1),
+(4, 3),
+(5, 3),
+(6, 4),
+(6, 5),
+(7, 4),
+(7, 5),
+(8, 1),
+(8, 2);
+
+INSERT INTO people_who_starred_in_the_same_movie (actor1_id, actor2_id) VALUES
+(1, 2),
+(1, 3),
+(4, 5);
+
+
+
+--Which actors played in a movie together?
+SELECT a1.name, a2.name
+FROM people_who_starred_in_the_same_movie x
+JOIN actors a1
+ON x.actor1_id = a1.id
+JOIN actors a2
+ON x.actor2_id = a2.id;
+
+--List the actors and the movies they have starred in.
+SELECT a.name, m.title
+FROM movies_with_actors x
+JOIN actors a
+ON x.actor_id = a.id
+JOIN movies m
+ON x.movie_id = m.id;
+
+--List the actors and the movies they have starred in.
+SELECT a.name, m.title
+FROM movies_with_actors x
+JOIN actors a
+ON x.actor_id = a.id
+JOIN movies m
+ON x.movie_id = m.id;
+
+--Going off of the previous question. Only list the movies that have a rating higher than 6.5
+
+SELECT a.name, m.title
+FROM movies_with_actors x
+JOIN actors a
+ON x.actor_id = a.id
+JOIN movies m
+ON x.movie_id = m.id
+WHERE m.rating > 6.5
+GROUP BY m.title;
