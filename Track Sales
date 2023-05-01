@@ -1,0 +1,140 @@
+--In this project I'll be querying data from 11 tables relating to each other in some way.
+
+--Show Customers (their full names, customer ID, and country) who are not in the US.
+SELECT CustomerId, FirstName, LastName, country
+FROM chinook.customers 
+WHERE Country <> 'USA' ;
+
+--Show only the Customers from Brazil.
+SELECT CustomerId, FirstName, LastName, country
+FROM chinook.customers
+WHERE Country = 'Brazil' ;
+
+--Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.
+SELECT i.InvoiceId, c.FirstName, c.LastName, i.InvoiceDate, i.BillingCountry
+FROM chinook.invoices i
+JOIN chinook.customers c 
+ON i.CustomerId = c.CustomerId
+WHERE c.Country = 'Brazil' ;
+
+--Show the Employees who are Sales Agents.
+SELECT FirstName, LastName
+FROM chinook.employees
+WHERE Title = 'Sales Support Agent' ;
+
+--Find a unique/distinct list of billing countries from the Invoice table.
+SELECT DISTINCT BillingCountry
+FROM chinook.invoices ;
+
+--Provide a query that shows the invoices associated with each sales agent.
+SELECT i.invoiceid, e.firstname, e.lastname
+FROM chinook.customers c
+JOIN chinook.invoices i
+ON c.customerid = i.customerid
+JOIN chinook.employees e
+ON c.supportrepid = e.employeeid
+ORDER BY i.invoiceid ;
+
+--Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers. 
+SELECT i.total, c.FirstName, c.LastName, c.Country, e.FirstName, e.LastName
+FROM chinook.customers c
+LEFT JOIN chinook.invoices i
+ON c.CustomerId = i.CustomerId
+LEFT JOIN chinook.employees e
+ON c.SupportRepId = e.EmployeeId ;
+
+--How many Invoices were there in 2009?
+SELECT COUNT(*)
+FROM chinook.invoices
+WHERE InvoiceDate like '2009%' ;
+
+--What are the total sales for 2009?
+SELECT SUM(Total)
+FROM chinook.invoices
+WHERE InvoiceDate like '2009%' ;
+
+--Write a query that includes the purchased track name with each invoice line ID and invoice ID.
+SELECT ii.invoiceid, ii.InvoiceLineId, t.Name
+FROM chinook.tracks t
+JOIN chinook.invoice_items ii
+ON t.TrackId = ii.TrackId ;
+
+--Write a query that shows the amount each customer spent, how many tracks they have purchased, and the number of times they made an order.
+SELECT c.firstname, c.lastname, round(sum(ii.unitprice)) as total_spent, sum(ii.quantity) as tracks_purchased, count(distinct i.invoiceid) as total_purchase_orders
+FROM chinook.invoices i 
+JOIN chinook.invoice_items ii
+ON i.invoiceid = ii.invoiceid
+JOIN chinook.customers c
+ON i.customerid = c.customerid
+GROUP BY c.customerid ;
+
+--Write a query that includes the purchased track name AND artist name with each invoice line ID.
+SELECT ii.InvoiceLineID, t.Composer, t.Name
+FROM chinook.tracks t
+JOIN chinook.invoice_items ii
+ON t.trackid = ii.trackid ;
+
+--Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+SELECT a.title as Album, t.Name as Song, g.name as Genre, m.name as Media
+FROM chinook.tracks t
+JOIN chinook.albums a
+ON t.albumid = a.albumid
+JOIN chinook.media_types m
+ON t.mediatypeid = m.mediatypeid
+JOIN chinook.genres g
+ON t.genreid = g.genreid ;
+
+--Show the total sales made by each sales agent.
+SELECT e.FirstName, e.LastName, round(sum(i.total)) as TotalSales
+FROM chinook.customers c
+JOIN chinook.employees e
+ON c.supportrepid = e.employeeid
+JOIN chinook.invoices i
+ON c.customerid = i.customerid
+GROUP BY e.employeeid ;
+
+--Which sales agent made the most dollars in sales in 2009?
+SELECT e.FirstName, e.LastName
+FROM chinook.customers c
+JOIN chinook.employees e
+ON c.supportrepid = e.employeeid
+JOIN chinook.invoices i
+ON c.customerid = i.customerid
+WHERE i.invoicedate like '2009%'
+GROUP BY e.employeeid
+ORDER BY sum(i.total) desc 
+LIMIT 1 ;
+
+--Write a query showing the number of times each track was purchased.
+SELECT t.name as TrackName, count(ii.quantity) as CopiesSold
+FROM chinook.invoice_items ii
+JOIN chinook.tracks t
+ON ii.trackid = t.trackid
+GROUP BY TrackName
+ORDER BY CopiesSold desc ;
+
+--Write a query showing how popular each genre is.
+SELECT g.name as Genre, count(ii.quantity) as CopiesSold
+FROM chinook.tracks t
+JOIN chinook.invoice_items ii
+ON t.trackid = ii.trackid
+JOIN chinook.genres g
+ON t.genreid = g.genreid
+GROUP BY g.genreid
+ORDER BY CopiesSold desc ;
+
+--Write a query using CASE to add labels describing the popularity of each genre based on sales.
+SELECT g.name as Genre,
+    CASE
+            WHEN count(ii.quantity) > 300 THEN 'Best Sellers'
+            WHEN count(ii.quantity) > 100 THEN 'Popular'
+            WHEN count(ii.quantity) <30 THEN 'Unpopular'
+            ELSE ''
+        END AS 'Rating'
+FROM chinook.tracks t
+JOIN chinook.invoice_items ii
+ON t.trackid = ii.trackid
+JOIN chinook.genres g
+ON t.genreid = g.genreid
+GROUP BY g.genreid
+ORDER BY Rating ;
